@@ -11,6 +11,14 @@ export class Room extends gfx.BoxMesh
     constructor(width: number, height: number, depth: number)
     {
         super(width, height, depth);
+
+        // Create the room material
+        const roomMaterial = new gfx.UnlitMaterial();
+        roomMaterial.color.set(0.95, 0.95, 0.95);
+        roomMaterial.texture = new gfx.Texture('./assets/holodeck.png');
+        roomMaterial.side = gfx.Side.BACK;
+        this.material = roomMaterial;
+        this.tileTexture(2.5);
     }
 
     public tileTexture(size: number)

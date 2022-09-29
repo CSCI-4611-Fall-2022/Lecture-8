@@ -10,7 +10,6 @@ import { Room } from './Room';
 export class PhysicsSimulation extends gfx.GfxApp
 {
     private room: Room;
-    private cameraControls: gfx.FirstPersonControls;
 
     constructor()
     {
@@ -19,7 +18,6 @@ export class PhysicsSimulation extends gfx.GfxApp
         super();
 
         this.room = new Room(40, 15, 40);
-        this.cameraControls = new gfx.FirstPersonControls(this.camera);
     }
 
     createScene(): void 
@@ -29,28 +27,12 @@ export class PhysicsSimulation extends gfx.GfxApp
         this.camera.position.set(0, 0, 15);
         this.camera.lookAt(gfx.Vector3.ZERO);
 
-        // Create an ambient light
-        const ambientLight = new gfx.AmbientLight(new gfx.Color(0.3, 0.3, 0.3));
-        this.scene.add(ambientLight);
-
-        // Create a directional light
-        const directionalLight = new gfx.DirectionalLight(new gfx.Color(0.6, 0.6, 0.6));
-        directionalLight.position.set(0, 2, 1);
-        this.scene.add(directionalLight);
-
-        // Create the room material
-        const roomMaterial = new gfx.UnlitMaterial();
-        roomMaterial.color.set(0.75, 0.75, 0.75);
-        roomMaterial.texture = new gfx.Texture('./assets/holodeck.png');
-        roomMaterial.side = gfx.Side.BACK;
-        this.room.material = roomMaterial;
-        this.room.tileTexture(2.5);
-
+        // Add objects to the scene
         this.scene.add(this.room);
     }
 
     update(deltaTime: number): void 
     {
-       this.cameraControls.update(deltaTime);
+
     }
 }
