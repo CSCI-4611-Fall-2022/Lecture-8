@@ -13,8 +13,9 @@ export class PhysicsSimulation extends gfx.GfxApp
 
     private room: Room;
     private target: gfx.Transform3;
-    
+
     private projectile: gfx.SphereMesh;
+    private projectileVelocity: gfx.Vector3;
 
     constructor()
     {
@@ -27,6 +28,8 @@ export class PhysicsSimulation extends gfx.GfxApp
         this.room = new Room(40, 15, 40);
         this.projectile = new gfx.SphereMesh(0.2, 2)
         this.target = new gfx.Transform3();
+
+        this.projectileVelocity = new gfx.Vector3();
     }
 
     createScene(): void 
@@ -92,10 +95,19 @@ export class PhysicsSimulation extends gfx.GfxApp
     update(deltaTime: number): void 
     {
         this.cameraControls.update(deltaTime);
+
+        this.projectile.position.x += this.projectileVelocity.x * deltaTime;
+        this.projectile.position.y += this.projectileVelocity.y * deltaTime;
+        this.projectile.position.z += this.projectileVelocity.z * deltaTime;
     }
 
     onMouseUp(event: MouseEvent): void 
     {
-        
+        this.projectile.position.x = this.camera.position.x;
+        this.projectile.position.y = this.camera.position.y - 1;
+        this.projectile.position.z = this.camera.position.z;
+
+        this.projectileVelocity.set(0, 0, -20);
+        this.projectileVelocity.rotate(this.camera.rotation);
     }
 }
