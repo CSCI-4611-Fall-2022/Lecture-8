@@ -45,7 +45,10 @@ export class PhysicsSimulation extends gfx.GfxApp
         // Add objects to the scene
         this.scene.add(this.room);
 
-        const disc = new gfx.SphereMesh(5);
+        const disc = new gfx.SphereMesh(5, 2);
+        const discMaterial = new gfx.UnlitMaterial();
+        discMaterial.color.set(0.95, 0.95, 0.95);
+        disc.material = discMaterial;
         this.scene.add(disc);
     }
 
