@@ -88,13 +88,16 @@ export class PhysicsSimulation extends gfx.GfxApp
         projectileMaterial.diffuseColor.set(1, 0, 0);
         this.projectile.material = projectileMaterial;
 
-        this.projectile.position.z = 21;
+        this.projectile.position.z = this.room.boundingBox.max.z + 1;
         this.scene.add(this.projectile);
     }
 
     update(deltaTime: number): void 
     {
         this.cameraControls.update(deltaTime);
+
+        if(this.projectileVelocity.length() == 0)
+            return;
 
         // Define forces
         const gravity = -5;
@@ -104,15 +107,25 @@ export class PhysicsSimulation extends gfx.GfxApp
         this.projectile.position.x += this.projectileVelocity.x * deltaTime;
         this.projectile.position.y += this.projectileVelocity.y * deltaTime;
         this.projectile.position.z += this.projectileVelocity.z * deltaTime;
+    
+        // Handle collision
+        if(this.projectile.position.z < this.room.boundingBox.min.z)
+        {
+            this.projectileVelocity.set(0, 0, 0);
+            this.projectile.position.z = this.room.boundingBox.max.z + 1;
+        }
     }
 
     onMouseUp(event: MouseEvent): void 
     {
-        this.projectile.position.x = this.camera.position.x;
-        this.projectile.position.y = this.camera.position.y - 1;
-        this.projectile.position.z = this.camera.position.z;
+        if(this.projectileVelocity.length() == 0)
+        {
+            this.projectile.position.x = this.camera.position.x;
+            this.projectile.position.y = this.camera.position.y - 1;
+            this.projectile.position.z = this.camera.position.z;
 
-        this.projectileVelocity.set(0, 5, -20);
-        this.projectileVelocity.rotate(this.camera.rotation);
+            this.projectileVelocity.set(0, 5, -20);
+            this.projectileVelocity.rotate(this.camera.rotation);
+        }
     }
 }

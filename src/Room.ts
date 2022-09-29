@@ -16,7 +16,7 @@ export class Room extends gfx.BoxMesh
         const roomMaterial = new gfx.UnlitMaterial();
         roomMaterial.color.set(0.95, 0.95, 0.95);
         roomMaterial.texture = new gfx.Texture('./assets/holodeck.png');
-        roomMaterial.side = gfx.Side.BACK;
+        roomMaterial.side = gfx.Side.DOUBLE;
         this.material = roomMaterial;
         this.tileTexture(2.5);
     }
