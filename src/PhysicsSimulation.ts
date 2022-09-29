@@ -13,6 +13,8 @@ export class PhysicsSimulation extends gfx.GfxApp
 
     private room: Room;
     private target: gfx.Transform3;
+    
+    private projectile: gfx.SphereMesh;
 
     constructor()
     {
@@ -23,6 +25,7 @@ export class PhysicsSimulation extends gfx.GfxApp
         this.cameraControls = new gfx.FirstPersonControls(this.camera);
         
         this.room = new Room(40, 15, 40);
+        this.projectile = new gfx.SphereMesh(0.2, 2)
         this.target = new gfx.Transform3();
     }
 
@@ -76,10 +79,23 @@ export class PhysicsSimulation extends gfx.GfxApp
         const yellowMaterial = new gfx.UnlitMaterial();
         yellowMaterial.color.set(1, 1, 0.15);
         (this.target.children[4] as gfx.SphereMesh).material = yellowMaterial;
+    
+        const projectileMaterial = new gfx.GouraudMaterial();
+        projectileMaterial.ambientColor.set(1, 0, 0);
+        projectileMaterial.diffuseColor.set(1, 0, 0);
+        this.projectile.material = projectileMaterial;
+
+        this.projectile.position.z = 21;
+        this.scene.add(this.projectile);
     }
 
     update(deltaTime: number): void 
     {
         this.cameraControls.update(deltaTime);
+    }
+
+    onMouseUp(event: MouseEvent): void 
+    {
+        
     }
 }
