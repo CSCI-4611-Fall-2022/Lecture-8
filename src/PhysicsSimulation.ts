@@ -12,6 +12,7 @@ export class PhysicsSimulation extends gfx.GfxApp
     private cameraControls: gfx.FirstPersonControls;
 
     private room: Room;
+    private target: gfx.Transform3;
 
     constructor()
     {
@@ -20,8 +21,9 @@ export class PhysicsSimulation extends gfx.GfxApp
         super();
 
         this.cameraControls = new gfx.FirstPersonControls(this.camera);
-
+        
         this.room = new Room(40, 15, 40);
+        this.target = new gfx.Transform3();
     }
 
     createScene(): void 
@@ -45,11 +47,35 @@ export class PhysicsSimulation extends gfx.GfxApp
         // Add objects to the scene
         this.scene.add(this.room);
 
-        const disc = new gfx.SphereMesh(5, 2);
-        const discMaterial = new gfx.UnlitMaterial();
-        discMaterial.color.set(0.95, 0.95, 0.95);
-        disc.material = discMaterial;
-        this.scene.add(disc);
+        for(let i=5; i > 0; i--)
+        {
+            const disc = new gfx.SphereMesh(i, 2);
+            disc.position.z = i * -0.1;
+            disc.scale.z = 0.01;
+            this.target.add(disc);
+        }
+        this.target.position.z = -19.5;
+        this.scene.add(this.target);
+
+        const whiteMaterial = new gfx.UnlitMaterial();
+        whiteMaterial.color.set(0.95, 0.95, 0.95);
+        (this.target.children[0] as gfx.SphereMesh).material = whiteMaterial;
+
+        const blackMaterial = new gfx.UnlitMaterial();
+        blackMaterial.color.set(0.1, 0.1, 0.1);
+        (this.target.children[1] as gfx.SphereMesh).material = blackMaterial;
+
+        const blueMaterial = new gfx.UnlitMaterial();
+        blueMaterial.color.set(.149, .576, .976);
+        (this.target.children[2] as gfx.SphereMesh).material = blueMaterial;
+
+        const redMaterial = new gfx.UnlitMaterial();
+        redMaterial.color.set(1, 0, 0);
+        (this.target.children[3] as gfx.SphereMesh).material = redMaterial;
+
+        const yellowMaterial = new gfx.UnlitMaterial();
+        yellowMaterial.color.set(1, 1, 0.15);
+        (this.target.children[4] as gfx.SphereMesh).material = yellowMaterial;
     }
 
     update(deltaTime: number): void 
