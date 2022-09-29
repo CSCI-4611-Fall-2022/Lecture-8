@@ -10,7 +10,11 @@ To work with this code, you will first need to install [Node.js 16.17.0 LTS](htt
 
 ## Topics
 
-- Referencing the textbook
+- Moving the perspective camera
+- Creating 3D geometry primitives
+- Implementing simple object physics
+- Handling object collisions
+- Drawing text
 
 ## Running
 
