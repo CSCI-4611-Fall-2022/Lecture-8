@@ -96,6 +96,11 @@ export class PhysicsSimulation extends gfx.GfxApp
     {
         this.cameraControls.update(deltaTime);
 
+        // Define forces
+        const gravity = -5;
+
+        this.projectileVelocity.y += gravity * deltaTime;
+
         this.projectile.position.x += this.projectileVelocity.x * deltaTime;
         this.projectile.position.y += this.projectileVelocity.y * deltaTime;
         this.projectile.position.z += this.projectileVelocity.z * deltaTime;
@@ -107,7 +112,7 @@ export class PhysicsSimulation extends gfx.GfxApp
         this.projectile.position.y = this.camera.position.y - 1;
         this.projectile.position.z = this.camera.position.z;
 
-        this.projectileVelocity.set(0, 0, -20);
+        this.projectileVelocity.set(0, 5, -20);
         this.projectileVelocity.rotate(this.camera.rotation);
     }
 }
