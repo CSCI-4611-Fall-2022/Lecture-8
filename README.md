@@ -1,6 +1,6 @@
 # Lecture 8: 3D Graphics Programming (Part 1)
 
-Detailed explanation of this code can be found in the lecture video (will be added after class).
+Detailed explanation of this code can be found in the [lecture video](https://mediaspace.umn.edu/media/t/1_7on1bfra).
 
 You can run the program on [GitHub pages](https://csci-4611-fall-2022.github.io/Lecture-8).
 
@@ -11,10 +11,9 @@ To work with this code, you will first need to install [Node.js 16.17.0 LTS](htt
 ## Topics
 
 - Moving the perspective camera
+- Introduction to scene lighting
 - Creating 3D geometry primitives
 - Implementing simple object physics
-- Handling object collisions
-- Drawing text
 
 ## Running
 
